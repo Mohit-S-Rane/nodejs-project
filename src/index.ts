@@ -1,5 +1,6 @@
 import * as express from "express";
 import * as mongoose from "mongoose";
+import { getEnvironmentVariables } from './enviroments/env';
 
 let app: express.Application = express();
 
@@ -7,7 +8,7 @@ app.listen(5000, () => {
   console.log("Server is running at port 5000");
 });
 
-mongoose.connect('mongodb+srv://admin:admin@cluster101.eyren.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect(getEnvironmentVariables().db_url)
 .then(()=> {
   console.log('MongoDB is now connected');
 });
