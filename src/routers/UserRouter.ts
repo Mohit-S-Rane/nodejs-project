@@ -15,7 +15,7 @@ class UserRouter {
   }
 
   getRoutes() {
-      this.router.get('/login', UserValidators.login(), UserController.login)
+      this.router.post('/signup', UserValidators.signup(), UserController.signUp)
   }
 
   postRoutes() {}
