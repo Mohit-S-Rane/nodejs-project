@@ -1,3 +1,4 @@
+import bodyParser = require("body-parser");
 import { Router } from "express";
 import express = require("express");
 import mongoose from "mongoose";
@@ -15,6 +16,7 @@ export class Server {
 
   setConfigurations() {
     this.connectMongoDb();
+    this.configureBodyParser();
   }
 
   connectMongoDb() {
@@ -22,6 +24,11 @@ export class Server {
     mongoose.connect(databaseUrl).then(() => {
       console.log("MongoDB is now connected");
     });
+  }
+
+  configureBodyParser() {
+    this.app.use(bodyParser.urlencoded({extended: true}))
+
   }
 
   setRoutes() {

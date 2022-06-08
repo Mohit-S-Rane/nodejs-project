@@ -1,8 +1,7 @@
 export class UserController {
   
   static login(req, res, next) {
-      const error = new Error('User does not exist');
-      next(error);
+      res.send(req.body)
   }
 
   static test(req, res, next) {
