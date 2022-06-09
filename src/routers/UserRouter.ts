@@ -2,6 +2,7 @@ import { Router } from "express";
 import { UserController } from './../controllers/UserController';
 import { body } from 'express-validator';
 import { UserValidators } from './../validators/UserValidator';
+import { GlobalMiddleWare } from './../middlewares/GlobalMiddleWare';
 
 class UserRouter {
   public router: Router;
@@ -14,13 +15,17 @@ class UserRouter {
       this.deleteRoutes();
   }
 
-  getRoutes() {
-      this.router.post('/signup', UserValidators.signup(), UserController.signUp)
+  getRoutes() {}
+
+  postRoutes() {
+    this.router.post('/signup', UserValidators.signup(), GlobalMiddleWare.checkError, UserController.signUp);
+
   }
 
-  postRoutes() {}
-
-  patchRoutes() {}
+  patchRoutes() {
+    this.router.patch('/verify', UserValidators.verifyUser(), GlobalMiddleWare.checkError, UserController.verify);
+  
+  }
 
   deleteRoutes() {}
 
